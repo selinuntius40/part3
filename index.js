@@ -2,7 +2,9 @@ const express = require('express')
 const morgan = require('morgan')
 const app = express()
 
-app.use(express.json())
+const cors = require('cors')
+app.use(cors())
+
 app.use(express.static('dist'))
 
 let persons = [
@@ -27,6 +29,8 @@ let persons = [
       "number": "39-23-6423122"
     }
 ]
+
+app.use(express.json())
 
 morgan.token('content', function (req, res) {return req.method === 'POST' ? JSON.stringify(req.body) : null})
 
